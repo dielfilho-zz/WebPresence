@@ -1,0 +1,46 @@
+<div class="container">
+	<div class="card-panel">
+		<h5>Adicionar uma Turma</h5>
+		{{trainees}}
+		<div class="row">
+			<form class="col s12">
+				<div class="input-field col s6">
+					<input type="text" id="date_init">
+					<label for="date_init">Data de Inicio</label>
+				</div>
+				<div class="input-field col s6">
+					<input type="text" id="date_end">
+					<label for="date_end">Data de Fim</label>
+				</div>
+				<div class="input-field col s6">
+					<input type="text" id="hour_init">
+					<label for="hour_init">Hora de Inicio</label>
+				</div>
+				<div class="input-field col s6">
+					<input type="text" id="hour_end">
+					<label for="hour_end">Hora de Fim</label>
+				</div>
+
+				<div class="input-field col s6">
+					<input type="text" id="check_presence">
+					<label for="check_presence">Tempo de checagem</label>
+				</div>
+
+				<table ng-show="isThereAnyTrainee()" class="highlight centered bordered responsive-table">
+					<thead>
+						<tr>
+							<td>
+								Matricula
+							</td>
+							<td>
+								Nome
+							</td>
+						</tr>
+					</thead>
+				</table>
+				
+				<button ng-disabled="!isThereAnyTrainee()" class="btn btn-primary">Cadastrar</button>
+			</form>
+		</div>
+	</div>
+</div>

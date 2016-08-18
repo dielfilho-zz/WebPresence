@@ -1,0 +1,17 @@
+<div class="container row">
+	<div class="card col s12 m5">
+		<form name="loginForm" method="post">
+			<input type="text" ng-model="user.username" ng-required="true" placeholder="Usuario"></input>
+			<input type="password" ng-model="user.pass" ng-required="true" placeholder="Senha"></input>
+			<div class="input-field">
+				<select class="browser-default" ng-model="user.role" ng-options="role.name for role in roles">
+					<option value="">Selecione uma Opçao</option>
+				</select>
+				<a href="#/trainee/newAccount">Estagiário? Crie uma conta agora!</a>
+			</div>
+			<button class="btn" ng-click="checkLogin(user)" ng-disabled="!user.username || !user.pass">Entrar</button>
+		</form>
+	</div>
+</div>
+
+

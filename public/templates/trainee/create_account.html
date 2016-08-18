@@ -1,0 +1,33 @@
+<div class="container">
+
+
+    <div class="row">
+      <div class="col s12 ">
+        <div class="card-panel">
+        	<h5>Criar uma conta</h5>
+    		<div class="row">
+				<div class="input-field col s6">
+					<input ng-model="trainee.name" id="name" type="text" class="validate">
+	          		<label for="name">Nome Completo</label>
+				</div>
+				<div class="input-field col s6">
+					<input ng-model="trainee.email" id="name" type="text" class="validate">
+	          		<label for="name">E-mail</label>
+				</div>
+				<div class="input-field col s6">
+					<input ng-model="trainee.username" id="name" type="text" class="validate">
+	          		<label for="name">Usuario</label>
+				</div>
+				<div class="input-field col s6">
+					<input id="name" ng-model="trainee.pass" type="password" class="validate">
+	          		<label for="name">Senha</label>
+				</div>
+				<button class="btn btn-primary" ng-click="createAccount(trainee)">Criar Conta</button>
+			</div>      
+        </div>
+      </div>
+    </div>
+
+
+	
+</div>
