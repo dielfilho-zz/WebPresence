@@ -1,11 +1,13 @@
 {
-    "name": "application-name"
-  , "version": "0.0.1"
-  , "private": false
-  , "dependencies": {
-      "express": "3.4.7"
-    , "ejs" : "0.8.5"
-    , "express-load": "1.1.8"
-    , "mongoose": "3.8.4"
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": false,
+  "dependencies": {
+    "async": "^2.0.1",
+    "ejs": "0.8.5",
+    "express": "3.4.7",
+    "express-load": "1.1.8",
+    "materialize-clockpicker": "^1.0.1",
+    "mongoose": "3.8.4"
   }
 }

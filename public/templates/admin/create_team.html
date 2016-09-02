@@ -1,46 +1,131 @@
 <div class="container">
 	<div class="card-panel">
-		<h5>Adicionar uma Turma</h5>
-		{{trainees}}
-		<div class="row">
+		<h4>Adicionar uma Turma</h4>
+        {{tempTeam}}
+        <div class="row">
 			<form class="col s12">
-				<div class="input-field col s6">
-					<input type="text" id="date_init">
-					<label for="date_init">Data de Inicio</label>
-				</div>
-				<div class="input-field col s6">
-					<input type="text" id="date_end">
-					<label for="date_end">Data de Fim</label>
-				</div>
-				<div class="input-field col s6">
-					<input type="text" id="hour_init">
-					<label for="hour_init">Hora de Inicio</label>
-				</div>
-				<div class="input-field col s6">
-					<input type="text" id="hour_end">
-					<label for="hour_end">Hora de Fim</label>
-				</div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="text" id="date_init" ng-model="tempTeam.date_init">
+                        <label for="date_init">Data de Inicio</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input type="text" id="date_end" ng-model="tempTeam.date_end">
+                        <label for="date_end">Data de Fim</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="text" id="mac_ap" ng-model="tempTeam.mac_ap">
+                        <label for="mac_ap">Mac do AP</label>
+                    </div>
+                </div>
 
-				<div class="input-field col s6">
-					<input type="text" id="check_presence">
-					<label for="check_presence">Tempo de checagem</label>
-				</div>
-
-				<table ng-show="isThereAnyTrainee()" class="highlight centered bordered responsive-table">
-					<thead>
-						<tr>
-							<td>
-								Matricula
-							</td>
-							<td>
-								Nome
-							</td>
-						</tr>
-					</thead>
-				</table>
-				
-				<button ng-disabled="!isThereAnyTrainee()" class="btn btn-primary">Cadastrar</button>
+                <h5>Dias da Semana</h5>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <a ng-repeat="day in daysOfWeek" ng-class="getButtonDayColor(day)" class='btn mg-left-s2' modal href="#modalDay" ng-click="openModalDay(day)">
+                            {{day.name}}
+                        </a>
+                    </div>
+                </div>
 			</form>
 		</div>
+        <h5>Estagiários disponíveis</h5>
+        <div class="input-field">
+            <table ng-hide="isThereAnyTrainee()" class="highlight centered bordered responsive-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Adicionar na Turma</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="trainee in trainees">
+                        <td>{{trainee.name}}</td>
+                        <td>{{trainee.email}}</td>
+                        <td>
+                            <input type="checkbox" class="filled-in" ng-model="trainee.selected" id={{$index+"check"}}>
+                            <label for={{$index+"check"}}></label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="input-field">
+
+            <button ng-disabled="isThereAnyTrainee()" ng-click="createTeam(tempTeam)" class="btn btn-primary">Cadastrar Turma</button>
+        </div>
+
 	</div>
+</div>
+
+<!--Modal Informations of the day-->
+<div id="modalDay" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>{{daySelected.name}}</h4>
+        <p>Cadastre os dados para esse dia.</p>
+
+        <div class="row">
+            <form class="row s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="input_daystarttime">Hora de Início</label>
+                        <input id="input_daystarttime" type="text" ng-model="daySelected.time_init">
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="input_dayendtime">Hora de Fim</label>
+                        <input id="input_dayendtime" type="text" ng-model="daySelected.time_end">
+                    </div>
+                </div>
+                <div class="input-field">
+                    <h5>Horários de checagem</h5>
+                    <p>Informe os horários de checagem de presença</p>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <label for="input_checkinittime">Hora de Início</label>
+                        <input id="input_checkinittime" type="text" ng-model="checkTime.time_init">
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="input_checkduration" type="text" ng-model="checkTime.duration">
+                        <label for="input_checkduration">Duração em Minutos</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <a class="waves-effect waves-light btn" ng-click="addCheckTime(checkTime)">
+                            <i class="material-icons right">av_timer</i>
+                            Adicionar
+                        </a>
+                    </div>
+                </div>
+                <div class="input-field">
+                    <table class="centered highlight">
+                        <thead>
+                            <tr>
+                                <th>Início da checagem</th>
+                                <th>Tempo de checagem</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="checkTime in daySelected.checkTimes">
+                                <td>{{checkTime.time_init}}</td>
+                                <td>{{checkTime.duration}}</td>
+                                <td>
+                                    <a class="red waves-effect waves-light btn" ng-click="removeCheckTime($index)">
+                                        <i class="material-icons">delete</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <a class="btn-flat waves-red waves-effect modal-action modal-close" ng-click="addTeamDay(daySelected)" >Cadastrar Dia</a>
+    </div>
 </div>

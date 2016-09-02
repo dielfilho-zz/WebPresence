@@ -1,18 +1,36 @@
 module.exports = function(app){
-	var Schema = require('mongoose').Schema;
+
+    var mongoose = require('mongoose');
+	var Schema = mongoose.Schema;
+    var ObjectId = mongoose.Types.ObjectId;
 
 	var team = Schema({
 		date_init: {type: Date, required: true},
 		date_end:  {type: Date, required: true},
-		time_init: {type: String, required: true},
-		time_end:  {type: String, required: true},
 		trainees: [{type: Schema.Types.ObjectId, ref: 'User'}],
-		check_presence: {type: Number, required: true}
+		days: [{type: Schema.Types.ObjectId, ref: 'Day'}],
+        mac_ap : {type: String, required: true}
 	});
 
 	team.statics.getAll = function(callback){
 		this.find({}, callback);
 	};
+
+	team.statics.create = function(team, trainees, days, callback){
+        var _team = new this();
+        _team.date_init = team.date_init;
+        _team.date_end = team.date_end;
+        _team.trainees = [];
+        _team.days = days;
+        _team.mac_ap = team.mac_ap;
+
+        trainees.forEach(function(_idTrainee){
+            _team.trainees.push(ObjectId(_idTrainee));
+        });
+
+        _team.save(callback);
+
+    };
 
 	return db.model('Team', team);
 

@@ -1,6 +1,8 @@
 module.exports = function(app){
 
-	var Schema = require('mongoose').Schema;
+	var mongoose = require('mongoose');
+	var Schema =  mongoose.Schema;
+    var ObjectId = mongoose.Types.ObjectId;
 
 	var user = Schema({
 		name : 	{type: String, required: true},
@@ -18,7 +20,9 @@ module.exports = function(app){
 	};
 
 	user.statics.getAllTrainees = function(callback){
-		var query = {'roles.type' : "TRAINEE"};
+        //GET TRAINEE'S ROLE ID
+        var query = { "roles" : ObjectId("57a9b7eb6153dcaea68e2277") };
+        
 		this.find(query).populate('roles').exec(callback);
 	};
 
