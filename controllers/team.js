@@ -37,7 +37,6 @@ module.exports = function(app){
             }, function() {
                 Team.create(team, trainees, days, function(err, team){
                     console.log(err);
-                    console.log(team);
                     if(err) {
                         console.log(err);
                         return res.json({result: false});
@@ -47,9 +46,20 @@ module.exports = function(app){
                 });
             });
 
-		}
+		},
+        
+        getTraineeTeams: function (req, res) {
+            var _idTrainee = req.params.id;
+            console.log(_idTrainee);
+            Team.getTraineeTeams(_idTrainee, function(err, teams){
+                console.log(err);
+                console.log(teams);
+                if(err)
+                    return res.json({result: false});
+                return res.json({result: true, data: teams});
 
-
+            });
+        }
 	};
 
 	return TeamController;

@@ -1,11 +1,11 @@
-angular.module("app").controller("AdminController", function($scope, teamService, traineeService, $routeParams){
+angular.module("app").controller("AdminController", function($scope, teamService, traineeService, $routeParams, toastService){
 
     //VARIABLES
     $scope.admin = {};
     $scope.teams = [];
 	$scope.trainees = [];
 
-    $scope.tempTeam = {date_init : null, date_end : null, days : [], trainees : []};
+    $scope.tempTeam = {name : "", date_init : null, date_end : null, days : [], trainees : []};
 
 	$scope.daysOfWeek = [
         {name:"Segunda", id: 1, checkTimes : []},
@@ -20,8 +20,21 @@ angular.module("app").controller("AdminController", function($scope, teamService
     //Getting the admin id
     $scope.admin._id = $routeParams.id;
 
+    //FUNCTIONS
+    var getAllTeams = function(){
+        teamService.getAll().then(function(response){
+            console.log(response);
+            if(response.data.result){
+                $scope.teams = response.data.data;
+            }else{
+                toastService.showMessage("Não foi possível pegar todas os Times!", 4000);
+            }
+        });
+    };
+    getAllTeams();
+
 	$scope.isTeamsEmpty = function(){
-		return $scope.teams.length <= 0;
+		return $scope.teams.length == 0;
 	};
 
 	$scope.isThereAnyTrainees = function(){
@@ -32,7 +45,7 @@ angular.module("app").controller("AdminController", function($scope, teamService
 		$scope.trainees = response.data.trainees;
 		
 		if(!$scope.trainees || !$scope.trainees > 0)
-			Materialize.toast("Nao há nenhum estagiário cadastrado ate o momento!", 5000);
+            toastService.showMessage("Nao há nenhum estagiário cadastrado ate o momento!", 5000);
 	});
 
 	//ADD TEAM FUNCTIONS
@@ -41,7 +54,11 @@ angular.module("app").controller("AdminController", function($scope, teamService
             return trainee.selected;
         });
         tempTeam.trainees = selectedTrainees;
-        teamService.createTeam(tempTeam);
+        teamService.createTeam(tempTeam).then(function(response){
+            if(response.result){
+                toastService.showMessage("Time cadastrado com sucesso!", 4000);
+            }
+        });
     };
 
     $scope.addCheckTime = function(checkTime){

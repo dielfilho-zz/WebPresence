@@ -1,9 +1,18 @@
 <div class="container">
 	<div class="card-panel">
 		<h4>Adicionar uma Turma</h4>
-        {{tempTeam}}
         <div class="row">
 			<form class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="text" id="team_name" ng-model="tempTeam.name">
+                        <label for="team_name">Nome da Turma</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input type="text" id="mac_ap" ng-model="tempTeam.mac_ap">
+                        <label for="mac_ap">MAC do AP</label>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="input-field col s6">
                         <input type="text" id="date_init" ng-model="tempTeam.date_init">
@@ -12,12 +21,6 @@
                     <div class="input-field col s6">
                         <input type="text" id="date_end" ng-model="tempTeam.date_end">
                         <label for="date_end">Data de Fim</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input type="text" id="mac_ap" ng-model="tempTeam.mac_ap">
-                        <label for="mac_ap">Mac do AP</label>
                     </div>
                 </div>
 

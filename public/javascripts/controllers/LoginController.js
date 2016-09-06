@@ -1,4 +1,4 @@
-angular.module("app").controller("LoginController", function($scope, loginServiceAPI, $location){
+angular.module("app").controller("LoginController", function($scope, loginServiceAPI, $location, toastService){
 
 	loginServiceAPI.getRoles().success(function(response){
 		var result = response.result;
@@ -15,10 +15,10 @@ angular.module("app").controller("LoginController", function($scope, loginServic
 		loginServiceAPI.checkLogin(user).success(function(response){
 			var result = response.result;
             if(!result){
-				Materialize.toast('Usuario e/ou Senha invalidos!', 4000);
+				toastService.showMessage('Usuario e/ou Senha invalidos!', 4000);
 			}else{
                 //Get returned user
-                var userLogged = response.user
+                var userLogged = response.user;
 
                 //Checking the role selected
                 var path = "/trainee/home";

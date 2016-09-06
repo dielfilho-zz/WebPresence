@@ -6,7 +6,7 @@ module.exports = function(app){
 
 	var user = Schema({
 		name : 	{type: String, required: true},
-		phone_mac : String,
+		phone_mac : [{type: String}],
 		email: String,
 		username: {type: String, required: true},
 		pass: {type: String, required: true},

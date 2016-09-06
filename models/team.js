@@ -9,12 +9,17 @@ module.exports = function(app){
 		date_end:  {type: Date, required: true},
 		trainees: [{type: Schema.Types.ObjectId, ref: 'User'}],
 		days: [{type: Schema.Types.ObjectId, ref: 'Day'}],
-        mac_ap : {type: String, required: true}
+        mac_ap : {type: String, required: true},
+        name: {type: String}
 	});
 
 	team.statics.getAll = function(callback){
-		this.find({}, callback);
+		this.find({}).populate('days').populate('trainees').exec(callback);
 	};
+
+    team.statics.getTraineeTeams = function (_idTrainee, callback) {
+        this.find({'trainees' : _idTrainee}).exec(callback);
+    };
 
 	team.statics.create = function(team, trainees, days, callback){
         var _team = new this();
@@ -23,6 +28,7 @@ module.exports = function(app){
         _team.trainees = [];
         _team.days = days;
         _team.mac_ap = team.mac_ap;
+        _team.name = team.name;
 
         trainees.forEach(function(_idTrainee){
             _team.trainees.push(ObjectId(_idTrainee));

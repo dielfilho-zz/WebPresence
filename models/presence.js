@@ -5,7 +5,7 @@ module.exports = function(){
 	var presence = Schema({
 		date : {type:Date, default: Date.now},
 		trainee: [{type: Schema.Types.ObjectId, ref: 'User'}],
-		team: {type: Schema.Types.ObjectId, ref: 'team'}
+		team: {type: Schema.Types.ObjectId, ref: 'team'},
 	});
 
 

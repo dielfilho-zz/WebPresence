@@ -9,3 +9,7 @@ a {
 .mg-left-s2{
   margin-left: 1px;
 }
+
+.text-bold{
+    font-weight: bold;
+}
