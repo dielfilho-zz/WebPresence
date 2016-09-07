@@ -1,7 +1,7 @@
-angular.module("app").controller("AdminController", function($scope, teamService, traineeService, $routeParams, toastService){
+angular.module("app").controller("AdminController", function($scope, teamService, traineeService, $stateParams, toastService){
 
     //VARIABLES
-    $scope.admin = {};
+    $scope.admin = $stateParams.userLogged;
     $scope.teams = [];
 	$scope.trainees = [];
 
@@ -17,8 +17,6 @@ angular.module("app").controller("AdminController", function($scope, teamService
         {name:"Domingo", id: 7, checkTimes : []},
     ];
 
-    //Getting the admin id
-    $scope.admin._id = $routeParams.id;
 
     //FUNCTIONS
     var getAllTeams = function(){

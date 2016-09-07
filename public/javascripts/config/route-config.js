@@ -1,36 +1,57 @@
-angular.module("app").config(function($routeProvider){
+angular.module("app").config(function($stateProvider){
 
 	// ADMIN ROUTES
 
-	$routeProvider.when('/', {
-		templateUrl: 'templates/home/login.html',
-		controller: 'LoginController'
+    $stateProvider.state({
+        url : '/',
+        name:'login',
+        controller: 'LoginController',
+		templateUrl: 'templates/home/login.html'
 	});
 
-	$routeProvider.when('/admin/home/:id', {
-		templateUrl: 'templates/admin/home.html',
-		controller: 'AdminController'
-	});	
-
-	$routeProvider.when('/team/create', {
-		templateUrl: 'templates/admin/create_team.html',
-		controller: 'AdminController'
-	});	
-
-
-	//TRAINEE ROUTES
-
-	$routeProvider.when('/trainee/newAccount', {
-		templateUrl: 'templates/trainee/create_account.html',
-		controller: 'TraineeController'
-	});
-	
-	$routeProvider.when('/trainee/home/:id', {
-       templateUrl : 'templates/trainee/home.html',
-       controller : 'TraineeController'
+    $stateProvider.state({
+        url: '/admin/home/',
+        name:'homeAdmin',
+        templateUrl: 'templates/admin/home.html',
+		controller: 'AdminController',
+        params: { userLogged: null}
     });
 
-    //DEFAULT ROUTE
-    $routeProvider.otherwise({redirectTo : "/"});
+    $stateProvider.state({
+        url:'/team/create',
+        name:'createTeam',
+		templateUrl: 'templates/admin/create_team.html',
+		controller: 'AdminController'
+    });
+
+
+    //TRAINEE ROUTES
+
+    $stateProvider.state({
+        url:'/trainee/newAccount',
+        name: 'traineeNewAccount',
+		templateUrl: 'templates/trainee/create_account.html',
+		controller: 'TraineeController'
+    });
+
+    $stateProvider.state({
+        url:'/trainee/home',
+        name: 'homeTrainee',
+        params: { userLogged : null },
+        templateUrl : 'templates/trainee/home.html',
+        controller : 'TraineeController'
+    });
+
+    $stateProvider.state({
+        url:'/trainee/team_details',
+        name:'teamDetails',
+        templateUrl : 'templates/trainee/team_details.html',
+        controller : 'TraineeController',
+        params: { teamSelected : null }
+    });
+
+    //
+    // //DEFAULT ROUTE
+    // $routeProvider.otherwise({redirectTo : "/"});
 
 });

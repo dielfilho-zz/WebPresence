@@ -1,2 +1,2 @@
-angular.module("app", ["ngRoute","ui.materialize"]);
+angular.module("app", ['ui.router','ui.materialize', 'angular.filter']);
 

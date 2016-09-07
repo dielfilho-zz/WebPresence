@@ -1,0 +1,21 @@
+<div class="container">
+    {{teamSelected}}
+
+    <div class="col s12 m7">
+        <div class="card hoverable">
+            <div class="card-content">
+                <p class="card-title flow-text">Detalhes da Turma</p>
+                <p>{{teamSelected.name}}</p>
+                <p>{{teamSelected.date_init}}</p>
+                <p>{{teamSelected.date_end}}</p>
+                <ul class="collection" ng-repeat="(key, value) in teamSelected.days | groupBy : 'date.day_name'">
+                    <li class="collection-item avatar" ng-repeat="day in value">
+                        <img src="/images/time_icon.png" class="circle">
+                        <span class="title text-bold">{{day.date.day_name}}</span>
+                        <p>{{day.time_init}} às {{day.time_end}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

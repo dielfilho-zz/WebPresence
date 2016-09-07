@@ -1,46 +1,60 @@
-angular.module("app").controller("TraineeController", function($scope, loginServiceAPI, traineeService, $location, $routeParams, toastService, teamService){
+angular.module("app").controller("TraineeController", function($scope, loginServiceAPI, traineeService, $state, $stateParams, toastService, teamService){
 
     //VARIABLES
-    $scope.trainee = {};
-
     //Get the trainee id
-    $scope.trainee._id = $routeParams.id;
+    $scope.trainee = $stateParams.userLogged ? $stateParams.userLogged : $scope.trainee;
     $scope.teams = [];
     $scope.roles = [];
+    $scope.teamSelected = $stateParams.teamSelected ? $stateParams.teamSelected : $scope.teamSelected;
 
-    loginServiceAPI.getRoles().success(function(response){
-        var result = response.result;
-        if(result){
-            $scope.roles = result;
-        }else{
-            console.error("Error get all Roles!");
+
+    console.log($scope.trainee);
+    console.log($scope.teamSelected);
+    //FUNCTIONS
+    getTraineeTeams();
+    getAllRoles();
+
+    function getTraineeTeams() {
+        if($scope.trainee) {
+            teamService.getTraineeTeams($scope.trainee._id).then(function (response) {
+                $scope.teams = response.data.data ? response.data.data : [];
+            });
         }
-    });
-    
-    teamService.getTraineeTeams($scope.trainee._id).then(function(response){
-        console.log(response);
-    });
+    };
+
+    function getAllRoles(){
+        loginServiceAPI.getRoles().success(function(response){
+            var result = response.result;
+            if(result){
+                $scope.roles = result;
+            }else{
+                console.error("Error get all Roles!");
+            }
+        });
+    };
 
 	$scope.createAccount = function(trainee){
 
-            //Setting the trainee role.
-            var roleTrainee = $scope.roles.filter(function(role){
-                return role.type == "TRAINEE";
-            }) ;
-            
-            $scope.trainee.roles = [roleTrainee[0]._id];
+           //Setting the trainee role.
+           var roleTrainee = $scope.roles.filter(function(role){
+               return role.type == "TRAINEE";
+           }) ;
 
-            traineeService.createAccount(trainee).success(function(traineeInserted){
-            $scope.trainee = traineeInserted;
+           $scope.trainee.roles = [roleTrainee[0]._id];
+           traineeService.createAccount(trainee).success(function(traineeInserted){
+           $scope.trainee = traineeInserted;
 
-            //Redirecting trainee to home page.
-            $location.path("/trainee/home");
+           //Redirecting trainee to home page.
+           $state.go("homeTrainee");
 
             toastService.showMessage("Conta criada com sucesso!", 4000);
-		}).error(function(err){
-			console.log(err);
-		});
+        }).error(function(err){
+            console.log(err);
+        });
 	};
 
+    $scope.teamDetails = function(team){
+        $state.go('teamDetails', {teamSelected : team});
+    };
 
 });

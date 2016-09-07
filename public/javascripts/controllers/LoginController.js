@@ -1,4 +1,4 @@
-angular.module("app").controller("LoginController", function($scope, loginServiceAPI, $location, toastService){
+angular.module("app").controller("LoginController", function($scope, loginServiceAPI, $state, toastService){
 
 	loginServiceAPI.getRoles().success(function(response){
 		var result = response.result;
@@ -21,11 +21,11 @@ angular.module("app").controller("LoginController", function($scope, loginServic
                 var userLogged = response.user;
 
                 //Checking the role selected
-                var path = "/trainee/home";
+                var path = "homeTrainee";
 				if(user.role.type == "ADMIN")
-                    path = "/admin/home";
+                    path = "homeAdmin";
 
-                $location.path(path+"/"+userLogged._id);
+				$state.go(path, {userLogged : userLogged});
 			}
 
 		}).error(function(response){
