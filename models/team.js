@@ -18,7 +18,7 @@ module.exports = function(app){
 	};
 
     team.statics.getTraineeTeams = function (_idTrainee, callback) {
-        this.find({'trainees' : _idTrainee}).populate('days').exec(callback);
+        this.find({'trainees' : _idTrainee}).populate('days').populate('trainees').exec(callback);
     };
 
 	team.statics.create = function(team, trainees, days, callback){

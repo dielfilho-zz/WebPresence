@@ -27,7 +27,8 @@ module.exports = function(app){
 					console.log(err+" "+userDB);
 					return res.json({result : false});
 				}
-				req.session.userLogged = user;
+				console.log("User: "+userDB+" added to session!");
+				req.session.userLogged = userDB;
 				return res.json({result:true, user:userDB});
 			});
 			

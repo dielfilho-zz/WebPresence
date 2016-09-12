@@ -8,8 +8,8 @@ angular.module("app").factory("teamService", function($http){
 		return $http.post('/team', team);
 	};
 
-	var _getTraineeTeams = function(_idTrainee){
-		return $http.get('/team/trainee/'+_idTrainee);
+	var _getTraineeTeams = function(){
+		return $http.get('/team/trainee/');
 	};
 
 

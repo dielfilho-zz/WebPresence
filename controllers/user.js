@@ -1,6 +1,7 @@
 module.exports = function(app){
 
 	var User = app.models.user;
+    var Presence = app.models.presence;
 
 	var UserController = {
 
@@ -24,7 +25,30 @@ module.exports = function(app){
 				}
 				return res.json({user: user});
 			});
-		}
+		},
+
+		getTeamPresence : function(req, res){
+            var idTeam = req.params.idTeam;
+            var idTrainee = req.params.idTrainee;
+            Presence.getTraineePresences(idTeam, idTrainee, function(err, presences){
+                if(err){
+                    console.log(err);
+                    return res.json({result:false, data:null});
+                }
+                return res.json({result:true, data: presences});
+            });
+		},
+
+        checkPresence : function(req, res){
+            
+            var idTrainee = req.body.idTrainee;
+
+            Presence.checkTraineePresence(idTrainee, function(err, presences){
+                console.log(err);
+                console.log(presences);
+                res.json({result:presences});
+            });
+        }
 
 
 	};

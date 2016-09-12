@@ -25,7 +25,7 @@ angular.module("app").controller("LoginController", function($scope, loginServic
 				if(user.role.type == "ADMIN")
                     path = "homeAdmin";
 
-				$state.go(path, {userLogged : userLogged});
+				$state.go(path, {userId : userLogged._id});
 			}
 
 		}).error(function(response){

@@ -2,25 +2,33 @@ angular.module("app").controller("TraineeController", function($scope, loginServ
 
     //VARIABLES
     //Get the trainee id
-    $scope.trainee = $stateParams.userLogged ? $stateParams.userLogged : $scope.trainee;
+    $scope.trainee = {_id: $stateParams.userId};
     $scope.teams = [];
     $scope.roles = [];
-    $scope.teamSelected = $stateParams.teamSelected ? $stateParams.teamSelected : $scope.teamSelected;
+    $scope.teamSelected = {};
+    $scope.presences = [];
 
-
-    console.log($scope.trainee);
-    console.log($scope.teamSelected);
     //FUNCTIONS
     getTraineeTeams();
     getAllRoles();
+    checkPresence();
+
+    function checkPresence(){
+        traineeService.checkPresence($scope.trainee._id).success(function(response){
+            console.log(response);
+        });
+    };
 
     function getTraineeTeams() {
-        if($scope.trainee) {
-            teamService.getTraineeTeams($scope.trainee._id).then(function (response) {
-                $scope.teams = response.data.data ? response.data.data : [];
-            });
-        }
+        teamService.getTraineeTeams().then(function (response) {
+            $scope.teams = response.data.data ? response.data.data : [];
+            //Getting the selected team
+            $scope.teamSelected = $scope.teams.filter(function(team){
+                return team._id == $stateParams.teamId;
+            })[0];
+        });
     };
+
 
     function getAllRoles(){
         loginServiceAPI.getRoles().success(function(response){
@@ -54,7 +62,12 @@ angular.module("app").controller("TraineeController", function($scope, loginServ
 	};
 
     $scope.teamDetails = function(team){
-        $state.go('teamDetails', {teamSelected : team});
+
+        traineeService.getTeamPresence(team._id, $scope.trainee._id).success(function(response){
+            console.log(response);
+        });
+
+        $state.go('teamDetails', {teamId : team._id});
     };
 
 });

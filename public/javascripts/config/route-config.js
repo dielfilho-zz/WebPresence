@@ -1,4 +1,4 @@
-angular.module("app").config(function($stateProvider){
+angular.module("app").config(function($stateProvider, $urlRouterProvider){
 
 	// ADMIN ROUTES
 
@@ -10,11 +10,10 @@ angular.module("app").config(function($stateProvider){
 	});
 
     $stateProvider.state({
-        url: '/admin/home/',
+        url: '/admin/home/:userId',
         name:'homeAdmin',
         templateUrl: 'templates/admin/home.html',
-		controller: 'AdminController',
-        params: { userLogged: null}
+		controller: 'AdminController'
     });
 
     $stateProvider.state({
@@ -35,23 +34,21 @@ angular.module("app").config(function($stateProvider){
     });
 
     $stateProvider.state({
-        url:'/trainee/home',
+        url:'/trainee/home/:userId',
         name: 'homeTrainee',
-        params: { userLogged : null },
         templateUrl : 'templates/trainee/home.html',
         controller : 'TraineeController'
     });
 
     $stateProvider.state({
-        url:'/trainee/team_details',
+        url:'/trainee/team_details/:teamId',
         name:'teamDetails',
         templateUrl : 'templates/trainee/team_details.html',
-        controller : 'TraineeController',
-        params: { teamSelected : null }
+        controller : 'TraineeController'
     });
 
-    //
+
     // //DEFAULT ROUTE
-    // $routeProvider.otherwise({redirectTo : "/"});
+    $urlRouterProvider.otherwise("/");
 
 });

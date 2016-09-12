@@ -1,20 +1,56 @@
 <div class="container">
-    {{teamSelected}}
-
     <div class="col s12 m7">
         <div class="card hoverable">
             <div class="card-content">
-                <p class="card-title flow-text">Detalhes da Turma</p>
-                <p>{{teamSelected.name}}</p>
-                <p>{{teamSelected.date_init}}</p>
-                <p>{{teamSelected.date_end}}</p>
-                <ul class="collection" ng-repeat="(key, value) in teamSelected.days | groupBy : 'date.day_name'">
-                    <li class="collection-item avatar" ng-repeat="day in value">
-                        <img src="/images/time_icon.png" class="circle">
-                        <span class="title text-bold">{{day.date.day_name}}</span>
-                        <p>{{day.time_init}} às {{day.time_end}}</p>
-                    </li>
-                </ul>
+                <h4 class="">Detalhes da Turma</h4>
+                <div class="row">
+                    <p class="text-bold col s1">Nome: </p>
+                    <p>{{teamSelected.name | date:'dd/MM/yyyy'}}</p>
+                </div>
+                <div class="row">
+
+                    <div class="col s4">
+                        <p class="text-bold">Início das atividades</p> <p>{{teamSelected.date_init | date:'dd/MM/yyyy'}}</p>
+                    </div>
+                    <div class="col s4">
+                        <p class="text-bold">Fim das atividades</p> <p>{{teamSelected.date_end | date:'dd/MM/yyyy'}}</p>
+                    </div>
+                </div>
+                <br>
+
+                <p class="flow-text">Dias de Atividade</p>
+                <br>
+                <div class="row">
+                    <div ng-repeat="(key, value) in teamSelected.days | groupBy : 'date.day_name'">
+                        <div class="col s2 collection-item avatar" ng-repeat="day in value">
+                            <div class="">
+                                <img src="/images/time_icon.png" class="circle img-small">
+                                <span class="title text-bold">{{day.date.day_name}}</span>
+                                <p>{{day.time_init}} às {{day.time_end}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <p class="flow-text">Suas Presenças</p>
+                <br>
+
+                <table class="responsive-table centered">
+                    <thead>
+                        <th>
+                            <td>Data</td>
+                            <td>Status</td>
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
             </div>
         </div>
     </div>

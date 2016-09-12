@@ -33,7 +33,7 @@ module.exports = function(app){
         _user.email = user.email;
         _user.username = user.username;
         _user.roles = user.roles;
-        console.log(user);
+        
         _user.save(callback);
 	}
 

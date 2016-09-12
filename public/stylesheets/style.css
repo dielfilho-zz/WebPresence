@@ -17,3 +17,7 @@ a {
 .clickable{
     cursor: pointer;
 }
+
+.img-small{
+ max-height: 25px;
+}

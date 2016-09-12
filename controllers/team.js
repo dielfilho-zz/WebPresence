@@ -49,17 +49,16 @@ module.exports = function(app){
 		},
         
         getTraineeTeams: function (req, res) {
-            var _idTrainee = req.params.id;
-            console.log(_idTrainee);
+            var _idTrainee = req.session.userLogged._id;
             Team.getTraineeTeams(_idTrainee, function(err, teams){
-                console.log(err);
-                console.log(teams);
-                if(err)
+                if(err) {
+                    console.log(err);
                     return res.json({result: false});
+                }
                 return res.json({result: true, data: teams});
-
             });
         }
+
 	};
 
 	return TeamController;
