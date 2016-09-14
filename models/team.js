@@ -21,6 +21,28 @@ module.exports = function(app){
         this.find({'trainees' : _idTrainee}).populate('days').populate('trainees').exec(callback);
     };
 
+    team.statics.findById = function (idTeam, callback) {
+        this.findOne({'_id':idTeam}).populate('days').exec(callback);
+    };
+
+    team.statics.findByIdAndDay = function(idTeam, idDay, callback){
+        this.findOne({'_id' : idTeam}).populate('days').exec(function(err, team){
+            if(err){
+                callback(err, team);
+            }else {
+                var sameDay = team.days.some(function (day) {
+                      return day.date.id = idDay
+                });
+
+                if(sameDay)
+                    callback(null, team);
+                else
+                    callback(null, null);
+            }
+
+        });
+    };
+
 	team.statics.create = function(team, trainees, days, callback){
         var _team = new this();
         _team.date_init = team.date_init;

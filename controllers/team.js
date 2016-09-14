@@ -4,9 +4,15 @@ module.exports = function(app){
     var Day = app.models.day;
     var async = require('async');
 
-	var TeamController = {
+    var strToDate = function (dateStr) {
+        var parts = dateStr.split("/");
+        return new Date(parts[2], parts[1] - 1, parts[0]);
+    };
 
-		getAll: function(req, res){
+
+    var TeamController = {
+
+        getAll: function(req, res){
 			Team.getAll(function(err, teams){
 				if(err)
 					return res.json({result:false});
@@ -35,8 +41,14 @@ module.exports = function(app){
                     callback();
                 });
             }, function() {
+                //Formatting the datas to yyyy/MM/dd
+                console.log(team.date_init);
+                console.log(team.date_end);
+
+                team.date_init = strToDate(team.date_init);
+                team.date_end = strToDate(team.date_end);
+
                 Team.create(team, trainees, days, function(err, team){
-                    console.log(err);
                     if(err) {
                         console.log(err);
                         return res.json({result: false});
@@ -58,7 +70,6 @@ module.exports = function(app){
                 return res.json({result: true, data: teams});
             });
         }
-
 	};
 
 	return TeamController;

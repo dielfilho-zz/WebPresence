@@ -11,21 +11,46 @@ angular.module("app").controller("TraineeController", function($scope, loginServ
     //FUNCTIONS
     getTraineeTeams();
     getAllRoles();
-    checkPresence();
+    getTraineePresences();
 
     function checkPresence(){
-        traineeService.checkPresence($scope.trainee._id).success(function(response){
-            console.log(response);
+        //Give presence for all trainee teams
+        $scope.teams.forEach(function (team) {
+            console.log(team);
+            traineeService.checkPresence($scope.trainee._id, team._id).success(function(response){
+                console.log("PRESENCE");
+                console.log(response);
+            });
         });
     };
+
+    function getTraineePresences(){
+        var teamId = $stateParams.teamId;
+        if(teamId) {
+            traineeService.getTeamPresence(teamId, $scope.trainee._id).success(function (response) {
+                if (response.result) {
+                    $scope.presences = response.data;
+                } else {
+                    toastService.showMessage("Não foi possível obter suas presenças!", 4000);
+                }
+            });
+        }
+    }
+
+    function getSelectedTeam(){
+        return $scope.teams.filter(function(team){
+            return team._id == $stateParams.teamId;
+        })[0];
+    }
 
     function getTraineeTeams() {
         teamService.getTraineeTeams().then(function (response) {
             $scope.teams = response.data.data ? response.data.data : [];
             //Getting the selected team
-            $scope.teamSelected = $scope.teams.filter(function(team){
-                return team._id == $stateParams.teamId;
-            })[0];
+            $scope.teamSelected = getSelectedTeam();
+
+            checkPresence();
+
         });
     };
 
@@ -62,12 +87,7 @@ angular.module("app").controller("TraineeController", function($scope, loginServ
 	};
 
     $scope.teamDetails = function(team){
-
-        traineeService.getTeamPresence(team._id, $scope.trainee._id).success(function(response){
-            console.log(response);
-        });
-
-        $state.go('teamDetails', {teamId : team._id});
+        $state.go('teamDetails', {teamId : team._id, userId:$scope.trainee._id});
     };
 
 });

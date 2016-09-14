@@ -12,8 +12,8 @@ angular.module('app').factory('traineeService', function($http){
         return $http.get('/trainee/presence/'+idTeam+'/'+idTrainee);
 	};
 
-    var _checkPresence = function(idTrainee){
-        return $http.post('/trainee/presence', {idTrainee : idTrainee});
+    var _checkPresence = function(idTrainee, idTeam){
+        return $http.post('/trainee/presence', {idTrainee : idTrainee, idTeam: idTeam});
     };
 
 	return {

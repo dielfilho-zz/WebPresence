@@ -35,17 +35,17 @@
                 <br>
                 <p class="flow-text">Suas Presenças</p>
                 <br>
-
                 <table class="responsive-table centered">
                     <thead>
-                        <th>
-                            <td>Data</td>
-                            <td>Status</td>
-                        </th>
+                        <tr>
+                            <th>Data</th>
+                            <th>Status</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
+                        <tr ng-repeat="presence in presences">
+                            <td>{{presence.date | date:'dd/MM/yyyy'}}</td>
+                            <td>Presente</td>
                         </tr>
                     </tbody>
                 </table>

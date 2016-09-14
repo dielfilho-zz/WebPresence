@@ -53,8 +53,10 @@ angular.module("app").controller("AdminController", function($scope, teamService
         });
         tempTeam.trainees = selectedTrainees;
         teamService.createTeam(tempTeam).then(function(response){
-            if(response.result){
-                toastService.showMessage("Time cadastrado com sucesso!", 4000);
+            if(response.data.result){
+                toastService.showMessage("Turma cadastrado com sucesso!", 4000);
+            }else{
+                toastService.showMessage("Não foi possível cadastrar essa Turma!", 4000);
             }
         });
     };

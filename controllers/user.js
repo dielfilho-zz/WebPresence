@@ -2,6 +2,7 @@ module.exports = function(app){
 
 	var User = app.models.user;
     var Presence = app.models.presence;
+    var Team = app.models.team;
 
 	var UserController = {
 
@@ -30,6 +31,7 @@ module.exports = function(app){
 		getTeamPresence : function(req, res){
             var idTeam = req.params.idTeam;
             var idTrainee = req.params.idTrainee;
+
             Presence.getTraineePresences(idTeam, idTrainee, function(err, presences){
                 if(err){
                     console.log(err);
@@ -42,12 +44,44 @@ module.exports = function(app){
         checkPresence : function(req, res){
             
             var idTrainee = req.body.idTrainee;
+            var idTeam = req.body.idTeam;
 
-            Presence.checkTraineePresence(idTrainee, function(err, presences){
-                console.log(err);
-                console.log(presences);
-                res.json({result:presences});
+            Presence.checkTraineePresence(idTrainee, idTeam, function(err, presence){
+                if(err){
+                    res.json({result: false, data:null});
+                }else {
+                    //The Trainee does not have te presence for today.
+                    console.log("####################### PRESENCE");
+                    console.log(presence.length);
+                    if (presence.length == 0) {
+                        var today =  new Date();
+                        Team.findByIdAndDay(idTeam, today.getDay(), function(err, team){
+                            console.log("####################### TEAM");
+                            console.log(team);
+                            if(err){
+                                console.log(err);
+                                res.json({result: false, data:null});
+                            }else{
+                                if(team){
+                                    Presence.doThePresence(idTrainee, idTeam, function(err, presence){
+                                        if(err){
+                                            console.log(err);
+                                            res.json({result: false, data:null});
+                                        }else {
+                                            res.json({result: true, data: presence});
+                                        }
+                                    });
+                                }else {
+                                    res.json({result: true, data: null});
+                                }
+                            }
+                        });
+                    }else{
+                        res.json({result:true, data:null});
+                    }
+                }
             });
+
         }
 
 

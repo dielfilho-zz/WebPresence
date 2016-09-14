@@ -41,7 +41,7 @@ angular.module("app").config(function($stateProvider, $urlRouterProvider){
     });
 
     $stateProvider.state({
-        url:'/trainee/team_details/:teamId',
+        url:'/trainee/team_details/:teamId/:userId',
         name:'teamDetails',
         templateUrl : 'templates/trainee/team_details.html',
         controller : 'TraineeController'
