@@ -20,11 +20,11 @@ module.exports = function(app){
 		createAccount : function(req, res){
 			var user = req.body;
 			User.insert(user, function(err, user){
-				if(err) {
+                if(err) {
                     console.log(err);
-					return res.json({user: null});
+					return res.json({result:false, data: null});
 				}
-				return res.json({user: user});
+				return res.json({result: true, data: user});
 			});
 		},
 
@@ -42,7 +42,6 @@ module.exports = function(app){
 		},
 
         checkPresence : function(req, res){
-            
             var idTrainee = req.body.idTrainee;
             var idTeam = req.body.idTeam;
 
@@ -50,20 +49,16 @@ module.exports = function(app){
                 if(err){
                     res.json({result: false, data:null});
                 }else {
-                    //The Trainee does not have te presence for today.
-                    console.log("####################### PRESENCE");
-                    console.log(presence.length);
+                    //The Trainee does not have the presence for today.
                     if (presence.length == 0) {
                         var today =  new Date();
                         Team.findByIdAndDay(idTeam, today.getDay(), function(err, team){
-                            console.log("####################### TEAM");
-                            console.log(team);
                             if(err){
                                 console.log(err);
                                 res.json({result: false, data:null});
                             }else{
                                 if(team){
-                                    Presence.doThePresence(idTrainee, idTeam, function(err, presence){
+                                    Presence.doThePresence(idTrainee, idTeam, 0, function(err, presence){
                                         if(err){
                                             console.log(err);
                                             res.json({result: false, data:null});
@@ -72,7 +67,7 @@ module.exports = function(app){
                                         }
                                     });
                                 }else {
-                                    res.json({result: true, data: null});
+                                    res.json({result: false, data: null});
                                 }
                             }
                         });
@@ -82,6 +77,100 @@ module.exports = function(app){
                 }
             });
 
+        },
+
+        checkPresenceDevice : function(req, res){
+            var idTeam = req.body.idTeam;
+            var idTrainee = req.body.idTrainee;
+            var percent = req.body.percent;
+            console.log(req.body);
+
+            Presence.checkTraineePresence(idTrainee, idTeam, function(err, presence){
+                if(err){
+                    console.log(err);
+                    res.json({result: false, data:null});
+                }else{
+                    var today =  new Date();
+                    Team.findByIdAndDay(idTeam, today.getDay(), function(err, team){
+                        if(err){
+                            console.log(err);
+                            res.json({result: false, data:null});
+                        }else{
+                            if(team){
+                                if(presence){
+                                    //Getting the numbers of check presences at today.
+                                    var day = team.days.filter(function(day){
+                                        return day.date.id == today.getDay();
+                                    })[0];
+                                    if(presence.checks == day.check_presence.length){
+                                        res.json({result: true, data:presence});   
+                                        return;   
+                                    }
+
+                                    //Incrementing the checks amount.
+                                    presence.checks += 1;
+
+                                    //Increment the checks and insert the new percent
+                                    presence.percents.push(percent);
+
+                                    if(presence.checks == day.check_presence.length && day.check_presence.length > 0){
+                                        //Doing the average of all percents.
+                                        var sum = 0;
+                                        var avg = 0;
+
+                                        presence.percents.forEach(function(perc){
+                                            sum += perc;
+                                        });
+
+                                        avg = sum / presence.percents.length;
+
+                                        var isPresenceValid = false;
+                                        if(team.percent <= avg){
+                                            //Telling that this presence is valid
+                                            isPresenceValid = true;
+                                        }
+
+                                        Presence.update(presence._id, presence.checks, presence.percents, avg, isPresenceValid, function(err, presence){
+                                            if(err){
+                                                console.log(err);
+                                                res.json({result: false, data:null});
+                                            }else{
+                                                presence.avg = avg;
+                                                console.log(presence);
+                                                res.json({result: true, data:presence});
+                                            }
+                                        });
+
+
+                                    }else{
+                                        console.log("Updating presence: "+presence.percents.length);
+                                        Presence.update(presence._id, presence.checks, presence.percents, 0, false, function(err, presence){
+                                            if(err){
+                                                console.log(err);
+                                                res.json({result: false, data:null});
+                                            }else{
+                                                res.json({result: false, data:presence});
+                                            }
+                                        });
+                                    }
+                                }else{
+                                    Presence.doThePresence(idTrainee, idTeam, [percent], function(err, presence){
+                                        if(err){
+                                            console.log(err);
+                                            res.json({result: false, data:null});
+                                        }else {
+                                            res.json({result: false, data: presence});
+                                        }
+                                    });
+                                }
+                            }else{
+                                res.json({result: false, data:null});
+                            }
+                        }
+                    });
+                }
+            });
+            
         }
 
 

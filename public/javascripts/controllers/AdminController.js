@@ -1,4 +1,4 @@
-angular.module("app").controller("AdminController", function($scope, teamService, traineeService, $stateParams, toastService){
+angular.module("app").controller("AdminController", function($scope, teamService, traineeService, $stateParams, toastService, $state){
 
     //VARIABLES
     $scope.admin = $stateParams.userLogged;
@@ -14,7 +14,7 @@ angular.module("app").controller("AdminController", function($scope, teamService
         {name:"Quinta",  id: 4, checkTimes : []},
         {name:"Sexta",   id: 5, checkTimes : []},
         {name:"Sábado",  id: 6, checkTimes : []},
-        {name:"Domingo", id: 7, checkTimes : []},
+        {name:"Domingo", id: 0, checkTimes : []},
     ];
 
 
@@ -54,6 +54,7 @@ angular.module("app").controller("AdminController", function($scope, teamService
         tempTeam.trainees = selectedTrainees;
         teamService.createTeam(tempTeam).then(function(response){
             if(response.data.result){
+                $state.go("homeAdmin");
                 toastService.showMessage("Turma cadastrado com sucesso!", 4000);
             }else{
                 toastService.showMessage("Não foi possível cadastrar essa Turma!", 4000);
@@ -77,7 +78,7 @@ angular.module("app").controller("AdminController", function($scope, teamService
     };
 
     $scope.getButtonDayColor = function(day){
-        return (day.checkTimes.length > 0 && day.time_init && day.time_end ) ? "green" : "blue-grey";
+        return (day.checkTimes.length > 0 && day.time_init && day.time_end ) ? "green" : "orange";
     }
 
     //MODAL FUNCTIONS

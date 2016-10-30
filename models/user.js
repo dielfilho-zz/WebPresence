@@ -4,6 +4,8 @@ module.exports = function(app){
 	var Schema =  mongoose.Schema;
     var ObjectId = mongoose.Types.ObjectId;
 
+    var Role = app.models.role;
+
 	var user = Schema({
 		name : 	{type: String, required: true},
 		phone_mac : [{type: String}],
@@ -14,9 +16,11 @@ module.exports = function(app){
 	});
 	
 	user.statics.checkLogin = function(user, callback){
-        console.log(user.role);
-		var query = {username: user.username, pass: user.pass, 'roles' : user.role._id};
-		this.findOne(query).populate('roles').exec(callback);
+        var self = this;
+        Role.getRoleByType(user.role.type, function(err, role){
+        	var query = {username: user.username, pass: user.pass, 'roles' : role._id};
+			self.findOne(query).populate('roles').exec(callback);
+        });
 	};
 
 	user.statics.getAllTrainees = function(callback){
@@ -28,13 +32,17 @@ module.exports = function(app){
 
 	user.statics.insert = function(user, callback){
 		var _user = new this();
-        _user.name = user.name;
-        _user.pass = user.pass;
-        _user.email = user.email;
-        _user.username = user.username;
-        _user.roles = user.roles;
+
+		Role.getRoleByType(user.role.type, function(err, role){
+			_user.name = user.name;
+        	_user.pass = user.pass;
+        	_user.email = user.email;
+        	_user.username = user.username;
+        	_user.roles = role._id;
         
-        _user.save(callback);
+        	_user.save(callback);
+        });
+		
 	}
 
 	return db.model('User', user);

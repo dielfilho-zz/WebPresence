@@ -1,26 +1,26 @@
 <div class="container">
     <div class="col s12 m7">
-        <div class="card horizontal hoverable">
+        <div class="card horizontal hoverable orange darken-5" ng-show="isTeamsEmpty()">
             <div class="card-stacked">
                 <div class="card-content">
-                    <p align="center" class="flow-text grey-text text-darken-1">Você não foi vinculado a nenhuma turma até o momento!</p>
+                    <p align="center" class="flow-text white-text">Você não foi vinculado a nenhuma turma até o momento!</p>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col s12 m6">
-            <div class="card">
+            <div class="card hoverable">
                 <div class="card-content">
                     <p class="card-title green-text text-darken-2" align="center">Seus Dispositivos</p>
                 </div>
             </div>
         </div>
         <div class="col s12 m6">
-            <div class="card">
+            <div class="card hoverable">
                 <div class="card-content">
                     <p class="card-title green-text text-darken-2" align="center">Suas Turmas</p>
-                    <table class="highlight centered responsive-table bordered">
+                    <table class="highlight centered responsive-table bordered" ng-hide="isTeamsEmpty()">
                         <thead>
                             <tr>
                                 <th>Nome</th>

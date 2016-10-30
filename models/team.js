@@ -10,7 +10,9 @@ module.exports = function(app){
 		trainees: [{type: Schema.Types.ObjectId, ref: 'User'}],
 		days: [{type: Schema.Types.ObjectId, ref: 'Day'}],
         mac_ap : {type: String, required: true},
-        name: {type: String}
+        name: {type: String},
+        distance: {type: Number},
+        percent: {type: Number}
 	});
 
 	team.statics.getAll = function(callback){
@@ -26,18 +28,27 @@ module.exports = function(app){
     };
 
     team.statics.findByIdAndDay = function(idTeam, idDay, callback){
+
         this.findOne({'_id' : idTeam}).populate('days').exec(function(err, team){
+            console.log("OLGTE: ");
+            console.log(team);
             if(err){
                 callback(err, team);
             }else {
-                var sameDay = team.days.some(function (day) {
-                      return day.date.id = idDay
-                });
-
-                if(sameDay)
-                    callback(null, team);
-                else
-                    callback(null, null);
+                if(!team) {
+                    callback(null, null)
+                }else {
+                    var sameDay = team.days.some(function (day) {
+                        console.log(day.date.id+" === "+idDay);
+                        return day.date.id == idDay;
+                    });
+                    console.log(sameDay);
+                    if (sameDay) {
+                        callback(null, team)
+                    }else {
+                        callback(null, null)
+                    }
+                }
             }
 
         });
@@ -51,6 +62,8 @@ module.exports = function(app){
         _team.days = days;
         _team.mac_ap = team.mac_ap;
         _team.name = team.name;
+        _team.distance = team.distance;
+        _team.percent = team.percent;
 
         trainees.forEach(function(_idTrainee){
             _team.trainees.push(ObjectId(_idTrainee));

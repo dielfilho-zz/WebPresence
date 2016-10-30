@@ -61,7 +61,7 @@ module.exports = function(app){
 		},
         
         getTraineeTeams: function (req, res) {
-            var _idTrainee = req.session.userLogged._id;
+            var _idTrainee = req.params.idTrainee;
             Team.getTraineeTeams(_idTrainee, function(err, teams){
                 if(err) {
                     console.log(err);
@@ -69,7 +69,28 @@ module.exports = function(app){
                 }
                 return res.json({result: true, data: teams});
             });
-        }
+        },
+
+
+        //This function return true if the team works at today, false otherwise.
+        haveWorkToday : function(req, res){
+            var idTeam = req.params.idTeam;
+            var today =  new Date();
+            
+            Team.findByIdAndDay(idTeam, today.getDay(), function(err, team){
+                if(err){
+                    console.log(err);
+                    res.json({result:false});
+                }else{
+                    if(team){
+                        res.json({result:true});
+                    }else{
+                        res.json({result:false});
+                    }
+                }
+            });
+
+        },
 	};
 
 	return TeamController;

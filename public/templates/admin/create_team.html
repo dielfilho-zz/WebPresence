@@ -8,19 +8,31 @@
                         <input type="text" id="team_name" ng-model="tempTeam.name">
                         <label for="team_name">Nome da Turma</label>
                     </div>
+
+                     <div class="input-field col s3">
+                        <input type="text" id="date_init" ng-model="tempTeam.date_init">
+                        <label for="date_init">Data de Inicio</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input type="text" id="date_end" ng-model="tempTeam.date_end">
+                        <label for="date_end">Data de Fim</label>
+                    </div>
+
+                </div>
+                
+                <h5>Configuraçao para Presença</h5>
+                <div class="row">
                     <div class="input-field col s6">
                         <input type="text" id="mac_ap" ng-model="tempTeam.mac_ap">
                         <label for="mac_ap">MAC do AP</label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input type="text" id="date_init" ng-model="tempTeam.date_init">
-                        <label for="date_init">Data de Inicio</label>
+                    <div class="input-field col s3">
+                        <input type="text" id="min_percent" ng-model="tempTeam.percent">
+                        <label for="min_percent">Porcentagem Minima</label>
                     </div>
-                    <div class="input-field col s6">
-                        <input type="text" id="date_end" ng-model="tempTeam.date_end">
-                        <label for="date_end">Data de Fim</label>
+                    <div class="input-field col s3">
+                        <input type="text" id="min_distance" ng-model="tempTeam.distance">
+                        <label for="min_distance">Distancia Minima (Metros)</label>
                     </div>
                 </div>
 
@@ -32,6 +44,7 @@
                         </a>
                     </div>
                 </div>
+                
 			</form>
 		</div>
         <h5>Estagiários disponíveis</h5>
@@ -57,8 +70,7 @@
             </table>
         </div>
         <div class="input-field">
-
-            <button ng-disabled="isThereAnyTrainee()" ng-click="createTeam(tempTeam)" class="btn btn-primary">Cadastrar Turma</button>
+            <button ng-disabled="isThereAnyTrainee()" ng-click="createTeam(tempTeam)" class="btn green btn-block">Cadastrar Turma</button>
         </div>
 
 	</div>
@@ -67,7 +79,13 @@
 <!--Modal Informations of the day-->
 <div id="modalDay" class="modal modal-fixed-footer">
     <div class="modal-content">
-        <h4>{{daySelected.name}}</h4>
+        <div class="row">
+            <h4 class="col s6">{{daySelected.name}}</h4>
+            <p class="col s6">
+                <input type="checkbox" class="filled-in" id="filled-in-box" />
+                <label for="filled-in-box">Repetir esses horários para todos os dias da semana</label>
+            </p>
+        </div>
         <p>Cadastre os dados para esse dia.</p>
 
         <div class="row">
@@ -81,6 +99,7 @@
                         <label for="input_dayendtime">Hora de Fim</label>
                         <input id="input_dayendtime" type="text" ng-model="daySelected.time_end">
                     </div>
+
                 </div>
                 <div class="input-field">
                     <h5>Horários de checagem</h5>

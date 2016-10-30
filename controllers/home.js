@@ -15,12 +15,17 @@ module.exports = function(app){
 					console.log("Error when trying get all roles: "+err);
 					res.json({result: false});
 				}
-				res.json({result: roles});
+				res.json({result: true, data:roles});
 			});
 		},
 
 		checkLogin: function(req, res){
+
+			console.log("CheckLogin Called");
+
 			var user = req.body;
+			console.log("USER: ");
+			console.log(user);
 
 			User.checkLogin(user, function(err, userDB){
 				if( err || !userDB ){
@@ -29,7 +34,7 @@ module.exports = function(app){
 				}
 				console.log("User: "+userDB+" added to session!");
 				req.session.userLogged = userDB;
-				return res.json({result:true, user:userDB});
+				return res.json({result:true, data:userDB});
 			});
 			
 		},

@@ -7,7 +7,7 @@ a {
 }
 
 .mg-left-s2{
-  margin-left: 1px;
+  margin-left: 8px;
 }
 
 .text-bold{
@@ -19,5 +19,24 @@ a {
 }
 
 .img-small{
- max-height: 25px;
+    max-height: 25px;
+}
+
+.img-medium{
+    max-height: 200px;
+}
+
+.card-container{
+    min-width: 30%;
+}
+
+.card-center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.text-center{
+    text-align: center;
 }

@@ -1,17 +1,39 @@
 <div class="container row">
-	<div class="card col s12 m5">
-		<form name="loginForm" method="post">
-			<input type="text" ng-model="user.username" ng-required="true" placeholder="Usuario"></input>
-			<input type="password" ng-model="user.pass" ng-required="true" placeholder="Senha"></input>
-			<div class="input-field">
-				<select class="browser-default" ng-model="user.role" ng-options="role.name for role in roles">
-					<option value="">Selecione uma Opçao</option>
-				</select>
-				<a href="#/trainee/newAccount">Estagiário? Crie uma conta agora!</a>
-			</div>
-			<button class="btn" ng-click="checkLogin(user)" ng-disabled="!user.username || !user.pass">Entrar</button>
-		</form>
-	</div>
+    <div class="col s12 m6">
+        <div class="card-container card-center">
+        <div class="card">
+            <div class="card-content">
+
+                <div class="row">
+                    <form class="col s12">
+                        <div class="input-field">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input type="text" ng-model="user.username" ng-required="true" placeholder="Usuario"></input>
+                        </div>
+
+                        <div class="input-field">
+                            <i class="material-icons prefix">vpn_key</i>
+                            <input type="password" ng-model="user.pass" zng-required="true" placeholder="Senha"></input>
+                        </div>
+
+                        <div class="input-field">
+                            <select class="browser-default" ng-model="user.role" ng-options="role.name for role in roles">
+                                <option value="">Selecione uma Opçao</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="card-action">
+                <a class="btn btn-block green darken-1 " ng-click="checkLogin(user)" ng-disabled="!user.username || !user.pass">Entrar</a>
+                <br>
+                <a class="btn btn-block text-center cyan accent-4" href="#/trainee/newAccount">Crie uma conta</a>
+            </div>
+        </div>
+        </div>
+    </div>
 </div>
 
 

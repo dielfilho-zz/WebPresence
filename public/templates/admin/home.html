@@ -1,21 +1,31 @@
 <div class="container">
     <div class="col s12 m7" ng-show="isTeamsEmpty()">
 		<div class="card horizontal">
-			<!--<div class="card-image">-->
-				<!--<img src="/images/icon-no-team.png">-->
-			<!--</div>-->
 			<div class="card-stacked">
-				<div class="card-content">
-					<h4>Nao ha nenhuma turma cadastrada ate o momento!</h4>
-				</div>
-				<div class="card-action">
-
+				<div class="text-center card-content">
+					<h5>Não há nenhuma turma cadastrada ate o momento!</h5>
+                    <a class="btn waves-effect waves-light orange" class href="#/team/create">
+                        Cadastrar Turmas
+                    </a>
 				</div>
 			</div>
 		</div>
 	</div>
     <div class="row">
-        <div class="col s12 m5"  ng-repeat="team in teams">
+
+        <!--Create team card-->
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Nova Turma</span>
+                    <a class="btn waves-effect waves-light orange" class href="#/team/create">
+                        Cadastrar Turma
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m4"  ng-repeat="team in teams">
             <div class="card hoverable">
                 <div class="card-content">
                     <span class="card-title">{{team.name}}</span>
@@ -38,23 +48,10 @@
                         <p>{{team.trainees.length}}</p>
                     </div>
                 </div>
-				<div class="card-action">
+			<!-- 	<div class="card-action">
 					<a class="grey-text" href={{"#/team/"+team._id}}>Detalhes</a>
-				</div>
+				</div> -->
             </div>
         </div>
     </div>
-    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-        <a class="btn-floating btn-large green">
-            <i class="large material-icons">reorder</i>
-        </a>
-        <ul>
-            <li>
-                <a class="btn-floating black" class href="#/team/create">
-                    <i class="material-icons">supervisor_account</i>
-                </a>
-            </li>
-        </ul>
-    </div>
-
 </div>

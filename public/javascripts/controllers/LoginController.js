@@ -1,9 +1,9 @@
 angular.module("app").controller("LoginController", function($scope, loginServiceAPI, $state, toastService){
 
-	loginServiceAPI.getRoles().success(function(response){
+    loginServiceAPI.getRoles().success(function(response){
 		var result = response.result;
 		if(result){
-			$scope.roles = result;
+			$scope.roles = response.data;
 		}else{
 			console.error("Error get all Roles!");
 		}
@@ -18,7 +18,7 @@ angular.module("app").controller("LoginController", function($scope, loginServic
 				toastService.showMessage('Usuario e/ou Senha invalidos!', 4000);
 			}else{
                 //Get returned user
-                var userLogged = response.user;
+                var userLogged = response.data;
 
                 //Checking the role selected
                 var path = "homeTrainee";
