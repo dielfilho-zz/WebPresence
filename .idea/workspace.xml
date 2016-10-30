@@ -2,31 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a2c54af-827b-4977-8a72-179a3e01d74e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/WebPresence_node_modules.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/WebPresence.iml" afterPath="$PROJECT_DIR$/.idea/WebPresence.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/home.js" afterPath="$PROJECT_DIR$/controllers/home.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/team.js" afterPath="$PROJECT_DIR$/controllers/team.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/user.js" afterPath="$PROJECT_DIR$/controllers/user.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/presence.js" afterPath="$PROJECT_DIR$/models/presence.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/role.js" afterPath="$PROJECT_DIR$/models/role.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/team.js" afterPath="$PROJECT_DIR$/models/team.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/user.js" afterPath="$PROJECT_DIR$/models/user.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/controllers/AdminController.js" afterPath="$PROJECT_DIR$/public/javascripts/controllers/AdminController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/controllers/LoginController.js" afterPath="$PROJECT_DIR$/public/javascripts/controllers/LoginController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/controllers/TraineeController.js" afterPath="$PROJECT_DIR$/public/javascripts/controllers/TraineeController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/services/TeamService.js" afterPath="$PROJECT_DIR$/public/javascripts/services/TeamService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/stylesheets/style.css" afterPath="$PROJECT_DIR$/public/stylesheets/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/templates/admin/create_team.html" afterPath="$PROJECT_DIR$/public/templates/admin/create_team.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/templates/admin/home.html" afterPath="$PROJECT_DIR$/public/templates/admin/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/templates/home/login.html" afterPath="$PROJECT_DIR$/public/templates/home/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/templates/trainee/home.html" afterPath="$PROJECT_DIR$/public/templates/trainee/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/templates/trainee/team_details.html" afterPath="$PROJECT_DIR$/public/templates/trainee/team_details.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/team.js" afterPath="$PROJECT_DIR$/routes/team.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/trainee.js" afterPath="$PROJECT_DIR$/routes/trainee.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/fragments/header.html" afterPath="$PROJECT_DIR$/views/fragments/header.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.html" afterPath="$PROJECT_DIR$/views/index.html" />
     </list>
     <ignored path="WebPresence.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -550,7 +526,7 @@
       <workItem from="1474419617172" duration="108000" />
       <workItem from="1474419940166" duration="4041000" />
       <workItem from="1474477682036" duration="70000" />
-      <workItem from="1477865289657" duration="109000" />
+      <workItem from="1477865289657" duration="131000" />
     </task>
     <task id="LOCAL-00001" summary="Create team functionality">
       <created>1472832962342</created>
@@ -587,11 +563,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473864687540</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Check presence for devices done.">
+      <created>1477865415852</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1477865415852</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="166264000" />
+    <option name="totallyTimeSpent" value="166286000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1368" height="768" extended-state="6" />
@@ -633,7 +616,8 @@
     <MESSAGE value="Lib ui-router added." />
     <MESSAGE value="Trainee Presence Functionality started." />
     <MESSAGE value="Presence Service done." />
-    <option name="LAST_COMMIT_MESSAGE" value="Presence Service done." />
+    <MESSAGE value="Check presence for devices done." />
+    <option name="LAST_COMMIT_MESSAGE" value="Check presence for devices done." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
