@@ -6,9 +6,7 @@ var mongoose = require('mongoose');
 var app = express();
 
 
-global.db = mongoose.connect('mongodb://diel:diel@ds057476.mlab.com:57476/heroku_7dp63n1v');
-
-
+global.db = mongoose.connect(process.env.MONGODB_URI);
 
 
 mongoose.connection.on('connected', function(){
@@ -36,6 +34,6 @@ app.configure(function(){
 load('models').then('controllers').then('routes').into(app);
 
 
-app.listen(3000, function(){
+app.listen((process.env.PORT || 8080), function(){
   console.log("PresenceWeb Server is Online...");
 });
