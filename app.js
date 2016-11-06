@@ -35,6 +35,6 @@ app.configure(function(){
 load('models').then('controllers').then('routes').into(app);
 
 
-app.listen((3000 || process.env.PORT), function(){
+app.listen( process.env.PORT, function(){
   console.log("PresenceWeb Server is Online...");
 });
