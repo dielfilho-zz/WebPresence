@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var app = express();
 
 
-global.db = mongoose.connect(process.env.MONGODB_URI);
+global.db = mongoose.connect("mongodb://localhost/presence_db" || "mongodb://heroku_f7pvlr44:dielfilho2314@ds019829.mlab.com:19829/heroku_f7pvlr44");
 
 
 mongoose.connection.on('connected', function(){
@@ -14,7 +14,8 @@ mongoose.connection.on('connected', function(){
 });
 
 mongoose.connection.on('error', function(err){
-  console.log("Error when tried connect to db: "+err);
+    console.log("Error when tried connect to db: ");
+    console.log(err);
 });
 
 
@@ -34,6 +35,6 @@ app.configure(function(){
 load('models').then('controllers').then('routes').into(app);
 
 
-app.listen((process.env.PORT || 8080), function(){
+app.listen((3000 || process.env.PORT), function(){
   console.log("PresenceWeb Server is Online...");
 });
