@@ -4,6 +4,47 @@ module.exports = function(app){
     var Presence = app.models.presence;
     var Team = app.models.team;
 
+    var checkPreseceIsValid = function(presence, team){
+        
+        var avg = getPresencesAverage(presence, team);
+        var isPresenceValid = false;
+        if(team.percent <= avg){
+            //Telling that this presence is valid
+            isPresenceValid = true;
+        }
+        
+        return isPresenceValid;
+    }
+
+    var getPresencesAverage = function(presence, team){
+        //Doing the average of all percents.
+        var sum = 0;
+        var avg = 0;
+
+        presence.percents.forEach(function(perc){
+            sum += perc;
+        });
+
+        avg = sum / presence.percents.length;
+
+        return avg;
+
+    };
+
+    var isLastCheck = function(presence, team){
+
+        var today = new Date();
+
+        //Getting the numbers of check presences at today.
+        var day = team.days.filter(function(day){
+            return day.date.id == today.getDay();
+        })[0];
+        if(presence.checks >= day.check_presence.length){
+            return true;
+        }   
+        return false;
+    }
+
 	var UserController = {
 
 		getAllTrainees : function(req, res){
@@ -95,76 +136,54 @@ module.exports = function(app){
                         if(err){
                             console.log(err);
                             res.json({result: false, data:null});
-                        }else{
-                            if(team){
-                                if(presence){
-                                    //Getting the numbers of check presences at today.
-                                    var day = team.days.filter(function(day){
-                                        return day.date.id == today.getDay();
-                                    })[0];
-                                    if(presence.checks == day.check_presence.length){
-                                        res.json({result: true, data:presence});   
-                                        return;   
-                                    }
-
+                        }else {
+                            if (team) {
+                                if (presence) {
                                     //Incrementing the checks amount.
                                     presence.checks += 1;
-
+                                    presence.lastCheck = isLastCheck(presence, team);
+                                    
                                     //Increment the checks and insert the new percent
                                     presence.percents.push(percent);
-
-                                    if(presence.checks == day.check_presence.length && day.check_presence.length > 0){
-                                        //Doing the average of all percents.
-                                        var sum = 0;
-                                        var avg = 0;
-
-                                        presence.percents.forEach(function(perc){
-                                            sum += perc;
-                                        });
-
-                                        avg = sum / presence.percents.length;
-
-                                        var isPresenceValid = false;
-                                        if(team.percent <= avg){
-                                            //Telling that this presence is valid
-                                            isPresenceValid = true;
-                                        }
-
-                                        Presence.update(presence._id, presence.checks, presence.percents, avg, isPresenceValid, function(err, presence){
-                                            if(err){
+                                    
+                                    if (presence.lastCheck) {
+                                        var avg = getPresencesAverage(presence, team);
+                                        
+                                        Presence.update(presence._id, presence.checks, presence.percents, avg, checkPreseceIsValid(presence, team), function (err, presence) {
+                                            if (err) {
                                                 console.log(err);
-                                                res.json({result: false, data:null});
-                                            }else{
-                                                presence.avg = avg;
-                                                console.log(presence);
-                                                res.json({result: true, data:presence});
+                                                res.json({result: false, data: null});
+                                            } else {
+                                                presence.lastCheck = true;
+                                                res.json({result: true, data: presence});
                                             }
                                         });
 
 
-                                    }else{
-                                        console.log("Updating presence: "+presence.percents.length);
-                                        Presence.update(presence._id, presence.checks, presence.percents, 0, false, function(err, presence){
-                                            if(err){
+                                    } else {
+                                        Presence.update(presence._id, presence.checks, presence.percents, 0, false, function (err, presence) {
+                                            if (err) {
                                                 console.log(err);
-                                                res.json({result: false, data:null});
-                                            }else{
-                                                res.json({result: false, data:presence});
+                                                res.json({result: false, data: null});
+                                            } else {
+                                                res.json({result: true, data: presence});
                                             }
                                         });
                                     }
-                                }else{
-                                    Presence.doThePresence(idTrainee, idTeam, [percent], function(err, presence){
-                                        if(err){
+                                } else {
+                                    Presence.doThePresence(idTrainee, idTeam, [percent], function (err, presence) {
+                                        if (err) {
                                             console.log(err);
-                                            res.json({result: false, data:null});
-                                        }else {
-                                            res.json({result: false, data: presence});
+                                            res.json({result: false, data: null});
+                                        } else {
+                                            presence.valid = checkPreseceIsValid(presence, team);
+                                            presence.lastCheck = isLastCheck(presence, team);
+                                            res.json({result: true, data: presence});
                                         }
                                     });
                                 }
-                            }else{
-                                res.json({result: false, data:null});
+                            } else {
+                                res.json({result: false, data: null});
                             }
                         }
                     });

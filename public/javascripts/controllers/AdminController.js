@@ -78,7 +78,7 @@ angular.module("app").controller("AdminController", function($scope, teamService
     };
 
     $scope.getButtonDayColor = function(day){
-        return (day.checkTimes.length > 0 && day.time_init && day.time_end ) ? "green" : "orange";
+        return (day.checkTimes.length > 0 && day.time_init && day.time_end ) ? "green" : "purple";
     }
 
     //MODAL FUNCTIONS

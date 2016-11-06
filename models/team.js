@@ -30,8 +30,6 @@ module.exports = function(app){
     team.statics.findByIdAndDay = function(idTeam, idDay, callback){
 
         this.findOne({'_id' : idTeam}).populate('days').exec(function(err, team){
-            console.log("OLGTE: ");
-            console.log(team);
             if(err){
                 callback(err, team);
             }else {
@@ -39,10 +37,8 @@ module.exports = function(app){
                     callback(null, null)
                 }else {
                     var sameDay = team.days.some(function (day) {
-                        console.log(day.date.id+" === "+idDay);
                         return day.date.id == idDay;
                     });
-                    console.log(sameDay);
                     if (sameDay) {
                         callback(null, team)
                     }else {

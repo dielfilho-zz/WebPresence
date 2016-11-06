@@ -1,30 +1,12 @@
 <div class="container">
-    <div class="col s12 m7" ng-show="isTeamsEmpty()">
-		<div class="card horizontal">
-			<div class="card-stacked">
-				<div class="text-center card-content">
-					<h5>Não há nenhuma turma cadastrada ate o momento!</h5>
-                    <a class="btn waves-effect waves-light orange" class href="#/team/create">
-                        Cadastrar Turmas
-                    </a>
-				</div>
-			</div>
-		</div>
+    <div class="row">
+        <div class="col s12">
+		    <a class="btn btn-large btn-block waves-effect waves-light orange" class href="#/team/create">
+                NOVA TURMA
+            </a>
+        </div>
 	</div>
     <div class="row">
-
-        <!--Create team card-->
-        <div class="col s12 m4">
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title">Nova Turma</span>
-                    <a class="btn waves-effect waves-light orange" class href="#/team/create">
-                        Cadastrar Turma
-                    </a>
-                </div>
-            </div>
-        </div>
-
         <div class="col s12 m4"  ng-repeat="team in teams">
             <div class="card hoverable">
                 <div class="card-content">

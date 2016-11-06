@@ -10,6 +10,7 @@
     "express": "3.4.7",
     "express-load": "1.1.8",
     "materialize-clockpicker": "^1.0.1",
-    "mongoose": "3.8.4"
+    "mongoose": "3.8.4",
+    "mongoose-schema-formatdate": "^1.0.0"
   }
 }

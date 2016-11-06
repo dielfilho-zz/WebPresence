@@ -11,7 +11,8 @@ module.exports = function(){
         checks : {type: Number},
         percents : [{type: Number}],
         average : {type: Number},
-        valid : {type: Boolean}
+        valid : {type: Boolean},
+        lastCheck: {type:Boolean, default: false}
 	});
 
 	presence.statics.getTraineePresences = function(idTeam, idTrainee, callback){
