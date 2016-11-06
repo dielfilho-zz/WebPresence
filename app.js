@@ -6,8 +6,8 @@ var mongoose = require('mongoose');
 var app = express();
 
 
-// global.db = mongoose.connect("mongodb://heroku_f7pvlr44:dielfilho2314@ds019829.mlab.com:19829/heroku_f7pvlr44");
-global.db = mongoose.connect(process.env.MONGOLAB_URI);
+global.db = mongoose.connect("mongodb://d:d@ds019829.mlab.com:19829/heroku_f7pvlr44");
+// global.db = mongoose.connect(process.env.MONGOLAB_URI);
 
 mongoose.connection.on('connected', function(){
   console.log("Mongoose Connected!");
