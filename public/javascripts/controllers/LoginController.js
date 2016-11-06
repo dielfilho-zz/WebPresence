@@ -2,12 +2,16 @@ angular.module("app").controller("LoginController", function($scope, loginServic
 
     loginServiceAPI.getRoles().success(function(response){
 		var result = response.result;
-		if(result){
+        console.log(response);
+        if(result){
 			$scope.roles = response.data;
 		}else{
 			console.error("Error get all Roles!");
 		}
-	});
+	}).error(function(err){
+        console.log("Error at login");
+        console.log(err);
+    });
 
 	$scope.checkLogin = function(user){
 		console.log("Sending the request...");
