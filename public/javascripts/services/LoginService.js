@@ -5,6 +5,7 @@ angular.module('app').factory('loginServiceAPI', function($http){
 	};
 
 	var _getRoles = function(){
+        console.log($http.get('/roles'));
 		return $http.get('/roles');
 	}
 
