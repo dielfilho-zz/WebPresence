@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var app = express();
 
 
-global.db = mongoose.connect('mongodb://heroku_7dp63n1v:heroku_7dp63n1v@ds057476.mlab.com:57476/heroku_7dp63n1v');
+global.db = mongoose.connect('mongodb://diel:diel@ds057476.mlab.com:57476/heroku_7dp63n1v');
 
 
 
