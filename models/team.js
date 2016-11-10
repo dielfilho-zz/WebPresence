@@ -33,12 +33,19 @@ module.exports = function(app){
             if(err){
                 callback(err, team);
             }else {
+                console.log("TEAM");
+                console.log(team);
+                
                 if(!team) {
                     callback(null, null)
                 }else {
                     var sameDay = team.days.some(function (day) {
                         return day.date.id == idDay;
                     });
+                    console.log("TEAM and day");
+                    console.log(team);
+                    console.log(sameDay);
+                
                     if (sameDay) {
                         callback(null, team)
                     }else {
