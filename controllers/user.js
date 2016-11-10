@@ -138,7 +138,11 @@ module.exports = function(app){
                             res.json({result: false, data:null});
                         }else {
                             if (team) {
+                                console.log("TEAM: ");
+                                console.log(team);
                                 if (presence) {
+                                    console.log("Presence: ");
+                                    console.log(presence);
                                     //Incrementing the checks amount.
                                     presence.checks += 1;
                                     presence.lastCheck = isLastCheck(presence, team);
@@ -171,6 +175,7 @@ module.exports = function(app){
                                         });
                                     }
                                 } else {
+                                    console.log("SAVING THE FIRST PRESENCE!!");
                                     Presence.doThePresence(idTrainee, idTeam, [percent], function (err, presence) {
                                         if (err) {
                                             console.log(err);
@@ -183,6 +188,7 @@ module.exports = function(app){
                                     });
                                 }
                             } else {
+                                console.log("THIS TEAM DOES NOT EXISTS");
                                 res.json({result: false, data: null});
                             }
                         }

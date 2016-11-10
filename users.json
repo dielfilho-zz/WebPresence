@@ -1,0 +1,3 @@
+{ "_id" : { "$oid" : "57a9dde1c517425688e75763" }, "name" : "Administrador", "username" : "admin", "pass" : "admin", "roles" : [ { "$oid" : "57a9b7d76153dcaea68e2276" } ] }
+{ "username" : "diel", "pass" : "diel", "name" : "Francisco Lopes Daniel Filho", "_id" : { "$oid" : "581e26fee15c58bd164a2844" }, "roles" : [ { "$oid" : "57a9b7eb6153dcaea68e2277" } ], "phone_mac" : [], "__v" : 0 }
+{ "username" : "ap", "pass" : "ap", "name" : "Aparelho Teste", "_id" : { "$oid" : "581e312ee15c58bd164a284a" }, "roles" : [ { "$oid" : "57a9b7eb6153dcaea68e2277" } ], "phone_mac" : [], "__v" : 0 }

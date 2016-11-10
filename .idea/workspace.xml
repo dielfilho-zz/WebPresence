@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8a2c54af-827b-4977-8a72-179a3e01d74e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
     </list>
     <ignored path="WebPresence.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -476,7 +475,8 @@
       <workItem from="1478020546079" duration="54000" />
       <workItem from="1478441876512" duration="2903000" />
       <workItem from="1478451426453" duration="4285000" />
-      <workItem from="1478473958434" duration="83000" />
+      <workItem from="1478473958434" duration="1253000" />
+      <workItem from="1478524993142" duration="17000" />
     </task>
     <task id="LOCAL-00001" summary="Create team functionality">
       <created>1472832962342</created>
@@ -590,17 +590,24 @@
       <option name="project" value="LOCAL" />
       <updated>1478474014294</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Setting the project to upload to heroku">
+      <created>1478474043638</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1478474043638</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="174689000" />
+    <option name="totallyTimeSpent" value="175876000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1368" height="768" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21593447" sideWeight="0.42260063" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21593447" sideWeight="0.42260063" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921174" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -935,7 +942,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2934">
           <caret line="163" column="40" selection-start-line="163" selection-start-column="40" selection-end-line="163" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>

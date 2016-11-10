@@ -1,0 +1,2 @@
+{ "_id" : { "$oid" : "57a9b7d76153dcaea68e2276" }, "name" : "Administrador", "type" : "ADMIN" }
+{ "_id" : { "$oid" : "57a9b7eb6153dcaea68e2277" }, "name" : "Estagiário", "type" : "TRAINEE" }
