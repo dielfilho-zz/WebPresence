@@ -44,6 +44,9 @@ module.exports = function(app){
                     });
                     console.log("TEAM and day");
                     console.log(team);
+                    console.log("DATE: ");
+                    console.log((new Date()));
+                    console.log(idDay);
                     console.log(sameDay);
                 
                     if (sameDay) {
