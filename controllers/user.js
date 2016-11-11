@@ -27,7 +27,10 @@ module.exports = function(app){
 
         avg = sum / presence.percents.length;
 
-        console.log("SUM : --------->  "+sum+" ------> "+presence.percents.length);
+        console.log("presence:   ");
+        console.log(presence);
+
+        console.log("SUM : --------->  "+sum);
 
         console.log("AVG : --------->  "+avg);
 
